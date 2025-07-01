@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Churrascaria de São Martinho | A Arte do Fogo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header id="pageHeader">
+        <div class="header-left">
+            <div class="language-switcher">
+                <button id="lang-toggle" class="lang-button">PT <i class="fas fa-chevron-down fa-xs"></i></button>
+                <ul id="lang-menu" class="lang-menu">
+                    <li><a href="#pt" data-lang="pt" class="lang-option active">Português</a></li>
+                    <li><a href="#en" data-lang="en" class="lang-option">English</a></li>
+                    <li><a href="#es" data-lang="es" class="lang-option">Español</a></li>
+                </ul>
+            </div>
+        </div>
+        <a href="index.html" class="logo-container">
+            <img src="assets/logo.png" alt="Logo da Churrascaria" class="logo-icon">
+            <span class="logo-text">Churrascaria de São Martinho</span>
+        </a>
+        <div class="header-right">
+            <button id="theme-toggle" class="theme-switch" aria-label="Mudar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="hero">
+            <video playsinline autoplay muted loop poster="assets/img00.png" class="hero-video-background">
+                <source src="assets/video1.webm" type="video/webm">
+                <source src="assets/video1.mp4" type="video/mp4">
+                O seu navegador não suporta vídeos HTML5.
+            </video>
+            <div class="hero-content">
+                <h1 data-key="hero_title">Sabores Autênticos</h1>
+                <p data-key="hero_subtitle">Desfrute da melhor churrascaria, onde o tradicional e o moderno se encontram para criar uma experiência única.</p>
+                <a href="#reservationModal" id="openModalBtn" class="btn btn-reserva" data-key="hero_button">Reservar Mesa</a>
+            </div>
+        </section>
+
+        <div class="content-wrapper">
+            <section id="sobrenos" class="section">
+                <div class="container">
+                    <h2 class="section-title" data-key="about_title">Sobre Nós</h2>
+                    <div class="about-grid">
+                        <div class="text-content anim-reveal">
+                            <p data-key="about_text"><span>B</span>em-vindo à nossa churrascaria, um tesouro culinário nascido da paixão pelas tradições e pelo sabor autêntico do churrasco. O nosso restaurante é um ponto de encontro para famílias e amigos.</p>
+                        </div>
+                        <div class="image-content anim-reveal"><img src="assets/img00.png" alt="Cozinheiro a preparar comida" loading="lazy"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="localizacao" class="video-section">
+                <video playsinline autoplay muted loop poster="assets/sala1.jpg" class="video-section-background">
+                    <source src="assets/video2.webm" type="video/webm">
+                    <source src="assets/video2.mp4" type="video/mp4">
+                    O seu navegador não suporta vídeos HTML5.
+                </video>
+                <div class="video-section-overlay"></div>
+                <div class="video-section-content">
+                    <h2 class="section-title anim-reveal" data-key="location_title">Onde Estamos</h2>
+                    <p class="anim-reveal" data-key="location_text">Situado na vibrante freguesia de São Martinho, o nosso restaurante oferece um ambiente acolhedor e familiar, a poucos passos da costa. Um convite para relaxar e desfrutar do melhor que o Funchal tem para oferecer.</p>
+                </div>
+            </section>
+
+            <section id="menulink" class="section">
+                <div class="container text-center">
+                    <h2 class="section-title anim-reveal" data-key="menu_title">O Nosso Menu</h2>
+                    <p class="section-subtitle anim-reveal" data-key="menu_subtitle">Da nossa famosa Espetada em Pau de Louro ao fresco Bife de Atum, cada prato é uma celebração dos sabores da Madeira. <br> Explore a nossa seleção completa e deixe-se tentar.</p>
+                    <a href="assets/menu.html" target="_blank" class="btn btn-primary anim-reveal" data-key="menu_button">Ver Menu Completo</a>
+                </div>
+            </section>
+        </div>
+
+        <section id="menu-showcase" class="section-menu-carousel">
+            <div class="container text-center">
+                <h2 class="section-title" data-key="specialties_title">As Nossas Especialidades</h2>
+                <p class="section-subtitle" data-key="specialties_subtitle">
+                    Uma viagem culinária pelos sabores mais autênticos da grelha, preparados com paixão e tradição.
+                </p>
+            </div>
+            <div class="marquee-wrapper">
+                <ul class="marquee-content" style="--num-items: 12;">
+                    <li class="marquee-item"><div class="panel-bg" style="background-image: url('assets/img2.png');"></div><div class="panel-content"><h3 data-key="card_picanha_title">Picanha</h3><div class="panel-description"><p data-key="card_picanha_desc">Um corte nobre, famoso pela sua suculência e textura macia. A sua distinta capa de gordura, quando grelhada, derrete sobre a carne, garantindo um sabor rico e memorável.</p></div></div></li>
+                    <li class="marquee-item"><div class="panel-bg" style="background-image: url('assets/img1.png');"></div><div class="panel-content"><h3 data-key="card_entrecosto_title">Entrecosto</h3><div class="panel-description"><p data-key="card_entrecosto_desc">Grelhadas lentamente sobre a brasa, estas costelas de porco são temperadas para realçar o seu sabor autêntico. O resultado é uma carne tenra que se solta facilmente do osso.</p></div></div></li>
+                    <li class="marquee-item"><div class="panel-bg" style="background-image: url('assets/img4.png');"></div><div class="panel-content"><h3 data-key="card_frango_title">Frango Assado</h3><div class="panel-description"><p data-key="card_frango_desc">Um clássico que nunca falha. Frango marinado com um toque de alho e ervas, assado lentamente no churrasco para garantir uma pele dourada e estaladiça e um interior suculento.</p></div></div></li>
+                    <li class="marquee-item"><div class="panel-bg" style="background-image: url('assets/img5.jpg');"></div><div class="panel-content"><h3 data-key="card_sobremesas_title">Sobremesas Caseiras</h3><div class="panel-description"><p data-key="card_sobremesas_desc">Do tradicional pudim de caramelo aos nossos cremosos mousses caseiros, cada sobremesa é uma doce tentação, feita diariamente na nossa cozinha para um final de refeição perfeito.</p></div></div></li>
+                    <li class="marquee-item"><div class="panel-bg" style="background-image: url('assets/img3.png');"></div><div class="panel-content"><h3 data-key="card_acompanhamentos_title">Acompanhamentos</h3><div class="panel-description"><p data-key="card_acompanhamentos_desc">Desde o crocante milho frito à tradicional batata-doce, os nossos acompanhamentos são essenciais em cada refeição. Dispomos de uma variedade de opções frescas, preparadas na hora para complementar na perfeição a sua escolha.</p></div></div></li>
+                    <li class="marquee-item"><div class="panel-bg" style="background-image: url('assets/img6.jpeg');"></div><div class="panel-content"><h3 data-key="card_adega_title">A Nossa Adega</h3><div class="panel-description"><p data-key="card_adega_desc">A nossa garrafeira celebra os tesouros de Portugal. Explore uma carta de vinhos que viaja desde os robustos tintos do Douro até aos icónicos vinhos da Madeira, cada um selecionado para elevar a sua experiência gastronómica.</p></div></div></li>
+                    <li class="marquee-item" aria-hidden="true"><div class="panel-bg" style="background-image: url('assets/img2.png');"></div><div class="panel-content"><h3>Picanha</h3><div class="panel-description"><p>Um corte nobre...</p></div></div></li>
+                    <li class="marquee-item" aria-hidden="true"><div class="panel-bg" style="background-image: url('assets/img1.png');"></div><div class="panel-content"><h3>Entrecosto</h3><div class="panel-description"><p>Grelhadas lentamente...</p></div></div></li>
+                    <li class="marquee-item" aria-hidden="true"><div class="panel-bg" style="background-image: url('assets/img4.png');"></div><div class="panel-content"><h3>Frango Assado</h3><div class="panel-description"><p>Um clássico que nunca falha...</p></div></div></li>
+                    <li class="marquee-item" aria-hidden="true"><div class="panel-bg" style="background-image: url('assets/img5.jpg');"></div><div class="panel-content"><h3>Sobremesas Caseiras</h3><div class="panel-description"><p>Do tradicional pudim...</p></div></div></li>
+                    <li class="marquee-item" aria-hidden="true"><div class="panel-bg" style="background-image: url('assets/img3.png');"></div><div class="panel-content"><h3>Acompanhamentos</h3><div class="panel-description"><p>Desde o crocante milho frito...</p></div></div></li>
+                    <li class="marquee-item" aria-hidden="true"><div class="panel-bg" style="background-image: url('assets/img6.jpeg');"></div><div class="panel-content"><h3>A Nossa Adega</h3><div class="panel-description"><p>A nossa garrafeira celebra...</p></div></div></li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="content-wrapper">
+            <section id="eventos" class="section">
+                <div class="container text-center">
+                    <h2 class="section-title anim-reveal" data-key="events_title">Eventos e Celebrações</h2>
+                    <p class="section-subtitle anim-reveal" data-key="events_subtitle">O nosso espaço exclusivo no último piso é o cenário perfeito para as suas celebrações mais especiais. Com uma sala ampla e um terraço privado com vistas deslumbrantes, ofereça aos seus convidados uma experiência inesquecível.</p>
+                    
+                    <div class="event-carousel-wrapper anim-reveal">
+                        <button class="carousel-arrow prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+                        <div class="event-carousel" id="eventCarousel">
+                            <div class="carousel-slide"><img src="assets/sala1.jpg" alt="Sala de eventos interior" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="assets/sala2.jpg" alt="Terraço da sala de eventos com vista" loading="lazy"></div>
+                        </div>
+                        <button class="carousel-arrow next" aria-label="Seguinte"><i class="fas fa-chevron-right"></i></button>
+                        <div class="carousel-dots" id="carouselDots"></div>
+                    </div>
+
+                    <a href="mailto:churrascariadesaomartinho@gmail.com?subject=Reserva de Sala para Evento" class="btn btn-primary anim-reveal" style="margin-top: 3rem;" data-key="events_button">Reservar Sala</a>
+                </div>
+            </section>
+
+            <section id="vinhos" class="video-section">
+                <video playsinline autoplay muted loop poster="assets/sala2.jpg" class="video-section-background">
+                    <source src="assets/vinho1.webm" type="video/webm">
+                    <source src="assets/vinho1.mp4" type="video/mp4">
+                    O seu navegador não suporta vídeos HTML5.
+                </video>
+                <div class="video-section-overlay"></div>
+                <div class="video-section-content">
+                    <h2 class="section-title anim-reveal" data-key="wine_title">A Nossa Garrafeira</h2>
+                    <p class="anim-reveal" data-key="wine_subtitle">Uma seleção cuidada de vinhos que representam o melhor de Portugal, escolhidos para harmonizar na perfeição com a arte do nosso churrasco.</p>
+                    <a href="./assets/vinhos.html" target="_blank" class="btn btn-primary anim-reveal" style="margin-top: 2rem;" data-key="wine_button">Carta de Vinhos</a>
+                </div>
+            </section>
+            
+            <footer id="pageFooterBottom">
+                <section id="contacto" class="section">
+                    <div class="container">
+                        <h2 class="section-title" data-key="contact_title">Contacto e Reservas</h2>
+                        <div class="contacto-info">
+                            <p>Caminho Igreja Nova, 5</p>
+                            <p><strong data-key="contact_hours">Horário:</strong> 12:00 – 23:00</p>
+                            <p><strong data-key="contact_phone">Telefone:</strong> +351 123 456 789</p>
+                        </div>
+                    </div>
+                </section>
+                <div class="footer-bottom">
+                    <div class="container">
+                        <p data-key="footer_copyright">&copy; 2025 Churrascaria de São Martinho - Todos os direitos reservados</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+    
+    <div id="reservationModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="Fechar">&times;</button>
+            <h2 class="modal-title" data-key="modal_res_title">Reservar Mesa</h2>
+            <p class="modal-subtitle" data-key="modal_res_subtitle">Garanta o seu lugar no paraíso do sabor.</p>
+            
+            <form id="reservationForm" action="https://formsubmit.co/joseamundarain35@gmail.com" method="POST">
+                
+                <input type="hidden" name="_subject" value="Nova Reserva! - Churrascaria São Martinho">
+                <input type="hidden" name="_next" value="obrigado.html"> <input type="hidden" name="_captcha" value="false">
+
+                <div class="form-group">
+                    <label for="guestName" data-key="modal_res_name">Nome</label>
+                    <input type="text" id="guestName" name="Nome" required>
+                </div>
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="reservationDate" data-key="modal_res_date">Data</label>
+                        <input type="date" id="reservationDate" name="Data" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reservationTime" data-key="modal_res_time">Hora</label>
+                        <input type="time" id="reservationTime" name="Hora" required step="1800">
+                    </div>
+                </div>
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="guestCount" data-key="modal_res_guests">Nº de Pessoas</label>
+                        <input type="number" id="guestCount" name="Pessoas" min="1" max="20" value="2" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guestPhone" data-key="modal_res_phone">Telefone</label>
+                        <input type="tel" id="guestPhone" name="Telefone" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary modal-btn" data-key="modal_res_button">Confirmar Reserva</button>
+            </form>
+            </div>
+    </div>
+    
+    <a href="https://wa.me/351967636454" id="whatsapp-widget" target="_blank" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <div id="marquee-overlay" class="marquee-overlay"></div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- CÓDIGO ORIGINAL (SIN CAMBIOS) ---
+        // (Observadores de scroll, carrusel, etc.)
+        const pageHeader = document.getElementById('pageHeader');
+        const mainContent = document.getElementById('main-content');
+        if (pageHeader && mainContent) {
+            const headerObserver = new IntersectionObserver((entries) => {
+                pageHeader.classList.toggle('scrolled', !entries[0].isIntersecting);
+            }, { rootMargin: "50px 0px 0px 0px" });
+            headerObserver.observe(mainContent);
+        }
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.anim-reveal').forEach(el => revealObserver.observe(el));
+        const carouselWrapper = document.querySelector('.event-carousel-wrapper');
+        if (carouselWrapper) {
+            const carousel = document.getElementById('eventCarousel');
+            const slides = Array.from(carousel.children);
+            const dotsContainer = document.getElementById('carouselDots');
+            const prevButton = carouselWrapper.querySelector('.carousel-arrow.prev');
+            const nextButton = carouselWrapper.querySelector('.carousel-arrow.next');
+            if (slides.length > 1) {
+                slides.forEach((_, index) => {
+                    const dot = document.createElement('button');
+                    dot.classList.add('carousel-dot');
+                    dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                    dot.addEventListener('click', () => goToSlide(index));
+                    dotsContainer.appendChild(dot);
+                });
+                const dots = Array.from(dotsContainer.children);
+                let currentIndex = 0;
+                const goToSlide = (index) => {
+                    carousel.scrollTo({ left: slides[index].offsetLeft, behavior: 'smooth' });
+                };
+                const updateCurrentIndex = () => {
+                    const newIndex = Math.round(carousel.scrollLeft / slides[0].offsetWidth);
+                    if (newIndex !== currentIndex) {
+                        currentIndex = newIndex;
+                        dots.forEach((dot, index) => dot.classList.toggle('active', index === currentIndex));
+                    }
+                };
+                let scrollTimeout;
+                carousel.addEventListener('scroll', () => {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(updateCurrentIndex, 150);
+                });
+                prevButton.addEventListener('click', () => goToSlide(currentIndex === 0 ? slides.length - 1 : currentIndex - 1));
+                nextButton.addEventListener('click', () => goToSlide(currentIndex === slides.length - 1 ? 0 : currentIndex + 1));
+                dots[0].classList.add('active');
+            } else {
+                if(prevButton) prevButton.style.display = 'none';
+                if(nextButton) nextButton.style.display = 'none';
+                if(dotsContainer) dotsContainer.style.display = 'none';
+            }
+        }
+        
+        // --- LÓGICA DE LA MARQUESINA ---
+        const marqueeContent = document.querySelector('.marquee-content');
+        const marqueeOverlay = document.getElementById('marquee-overlay');
+        let activeClone = null;
+        const closeExpandedCard = () => {
+            if (activeClone) {
+                document.body.removeChild(activeClone);
+                activeClone = null;
+                marqueeOverlay.style.display = 'none';
+                if (marqueeContent) marqueeContent.classList.remove('is-paused');
+            }
+        };
+        if (marqueeContent) {
+            marqueeContent.addEventListener('click', (e) => {
+                const item = e.target.closest('.marquee-item');
+                if (activeClone || !item || item.hasAttribute('aria-hidden')) return;
+                marqueeContent.classList.add('is-paused');
+                marqueeOverlay.style.display = 'block';
+                activeClone = item.cloneNode(true);
+                activeClone.classList.add('is-expanded');
+                document.body.appendChild(activeClone);
+                activeClone.addEventListener('click', closeExpandedCard);
+            });
+        }
+        if (marqueeOverlay) marqueeOverlay.addEventListener('click', closeExpandedCard);
+
+        // --- LÓGICA DE TEMA Y TRADUCCIÓN ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = '<i class="fas fa-sun"></i>';
+        const moonIcon = '<i class="fas fa-moon"></i>';
+        const applyTheme = (theme) => {
+            document.body.classList.toggle('dark-mode', theme === 'dark');
+            themeToggle.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
+        };
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            localStorage.setItem('theme', currentTheme);
+            applyTheme(currentTheme);
+        });
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        applyTheme(savedTheme);
+        const translations = { /* Tu objeto de traducciones aquí */ };
+        const langToggle = document.getElementById('lang-toggle');
+        const langMenu = document.getElementById('lang-menu');
+        const langOptions = document.querySelectorAll('.lang-option');
+        const setLanguage = (lang) => { /* Tu función de idioma aquí */ };
+        langToggle.addEventListener('click', (e) => { e.stopPropagation(); langMenu.classList.toggle('active'); });
+        langOptions.forEach(option => { option.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); const selectedLang = option.getAttribute('data-lang'); setLanguage(selectedLang); langMenu.classList.remove('active'); }); });
+        window.addEventListener('click', () => { if (langMenu.classList.contains('active')) { langMenu.classList.remove('active'); } });
+        const savedLanguage = localStorage.getItem('language') || 'pt';
+        setLanguage(savedLanguage);
+
+        // ==================================================================
+        // LÓGICA DEL MODAL DE RESERVA (SIMPLIFICADA PARA FORMSUBMIT)
+        // ==================================================================
+        const reservationModal = document.getElementById('reservationModal');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = reservationModal.querySelector('.close-modal');
+
+        if(openModalBtn) {
+            openModalBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                reservationModal.style.display = 'flex';
+            });
+        }
+
+        if(closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => {
+                reservationModal.style.display = 'none';
+            });
+        }
+
+        reservationModal.addEventListener('click', (e) => {
+            if (e.target === reservationModal) {
+                reservationModal.style.display = 'none';
+            }
+        });
+
+    });
+    </script>
+</body>
+</html>

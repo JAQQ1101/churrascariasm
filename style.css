@@ -1,0 +1,316 @@
+/* ==========================================================================
+   CHURRASCARIA - V12.8 (Corrección de Modal Móvil y Funcionalidad de Idioma)
+   ========================================================================== */
+
+/* ==========================================================================
+   1. CONFIGURACIÓN, FONTES E ESTILOS BASE
+   ========================================================================== */
+:root {
+  --vermelho: #B93C38;
+  --ouro: #E0C070;
+  
+  /* Colores Base para MODO CLARO */
+  --cor-fundo-principal: #FFFFFF;
+  --cor-fundo-secundario: #f7f7f7;
+  --cor-texto-principal: #1a1a1a;
+  --cor-texto-secundario: #333;
+  --cor-borda: #e0e0e0;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: var(--cor-texto-secundario);
+  background-color: var(--cor-fundo-principal);
+  line-height: 1.7;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* ==========================================================================
+   2. ESTRUTURA E ANIMAÇÕES
+   ========================================================================== */
+.content-wrapper { 
+    background-color: var(--cor-fundo-principal); 
+    transition: background-color 0.4s ease; 
+}
+.anim-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.anim-reveal.is-visible { opacity: 1; transform: translateY(0); }
+.section { padding: 8rem 4rem; }
+.container { max-width: 960px; margin: 0 auto; padding: 0 1rem; }
+.section-title {
+  font-family: var(--font-titulos);
+  font-size: clamp(2.8rem, 6vw, 4rem);
+  font-weight: 700;
+  color: var(--cor-texto-principal);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  line-height: 1.1;
+  transition: color 0.4s ease;
+}
+.section-subtitle {
+  max-width: 650px;
+  margin: 0 auto 3rem auto;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: center;
+  color: var(--cor-texto-secundario);
+}
+.text-center { text-align: center; }
+
+/* ==========================================================================
+   3. CABEÇALHO (HEADER)
+   ========================================================================== */
+header#pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 1020;
+  transition: all 0.4s ease;
+  background-color: rgba(18, 18, 18, 0.5);
+}
+header#pageHeader.scrolled {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.header-left, .header-right { flex: 1; z-index: 2; }
+.header-right { display: flex; justify-content: flex-end; gap: 1rem; }
+.logo-container {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex; align-items: center; 
+  gap: 0.75rem; text-decoration: none; 
+  color: #ffffff; transition: all 0.4s ease;
+  width: max-content;
+}
+.logo-icon { height: 70px; transition: all 0.4s ease; }
+.logo-text { font-family: var(--font-titulos); font-weight: 700; font-size: 2rem; line-height: 1; transition: all 0.4s ease; }
+header#pageHeader.scrolled .logo-icon { height: 35px; }
+header#pageHeader.scrolled .logo-text { font-size: 1.6rem; }
+
+/* ==========================================================================
+   4. SELETOR DE IDIOMAS Y THEME SWITCH
+   ========================================================================== */
+.lang-button, .theme-switch {
+    background-color: transparent; border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #ffffff; font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600; font-size: 0.9rem; padding: 0.5rem 1rem;
+    border-radius: 50px; cursor: pointer; transition: all 0.3s ease;
+    min-width: 90px;
+}
+.theme-switch { width: 40px; height: 40px; padding: 0; font-size: 1rem; min-width: 40px; }
+header#pageHeader.scrolled .lang-button,
+header#pageHeader.scrolled .theme-switch { border-color: var(--cor-borda); color: var(--cor-texto-principal); }
+header#pageHeader.scrolled .logo-text { color: var(--cor-texto-principal); }
+.lang-button:hover, .theme-switch:hover { background-color: var(--cor-texto-principal); color: var(--cor-fundo-principal); }
+.language-switcher { position: relative; }
+.lang-menu {
+    position: absolute; top: calc(100% + 10px); left: 0;
+    background-color: rgba(250, 250, 250, 0.8);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    list-style: none; padding: 0.5rem; border-radius: 6px; width: 150px;
+    z-index: 1021; opacity: 0; visibility: hidden; transform: translateY(10px);
+    transition: all 0.3s ease; border: 1px solid var(--cor-borda);
+}
+.lang-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
+.lang-menu a { display: block; color: var(--cor-texto-principal); text-decoration: none; padding: 0.75rem 1rem; border-radius: 4px; font-size: 0.9rem; transition: background-color 0.2s ease, color 0.2s ease; }
+.lang-menu a:hover { background-color: rgba(0, 0, 0, 0.05); }
+.lang-menu a.active { font-weight: bold; color: var(--vermelho); }
+
+/* ==========================================================================
+   5. SECÇÕES PRINCIPAIS
+   ========================================================================== */
+.hero { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; color: #ffffff; padding: 1rem; overflow: hidden; }
+.hero-video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.hero::after { content: ''; position: absolute; inset: 0; z-index: 2; background: rgba(0,0,0,0.5); }
+.hero-content { position: relative; z-index: 3; text-align: center; }
+.hero-content h1 { font-family: var(--font-titulos); font-weight: 700; font-size: clamp(4rem, 12vw, 9rem); line-height: 1; text-shadow: 0 5px 25px rgba(0,0,0,0.5); }
+.hero-content p { font-family: 'Source Sans Pro', sans-serif; font-size: clamp(1rem, 2.5vw, 1.25rem); margin: 1.5rem auto 2.5rem; max-width: 550px; line-height: 1.6; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+
+.about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: center; gap: 5rem; }
+.about-grid .text-content p span { font-family: var(--font-titulos); color: var(--vermelho); font-size: 4.5rem; float: left; line-height: 0.8; margin-right: 0.8rem; margin-top: 0.5rem; transition: color 0.4s ease; }
+.about-grid .image-content img { width: 100%; height: auto; display: block; }
+
+.video-section { position: relative; height: 70vh; display: flex; align-items: center; justify-content: center; color: #ffffff; text-align: center; padding: 2rem; overflow: hidden; }
+.video-section-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.video-section-overlay { content: ''; position: absolute; inset: 0; z-index: 2; background: rgba(0,0,0,0.5); }
+.video-section-content { position: relative; z-index: 3; }
+.video-section .section-title, .video-section p { text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+.video-section .section-title { color: #ffffff; }
+.video-section p { font-size: 1.2rem; line-height: 1.8; max-width: 600px; margin: 0 auto; }
+
+/* ==========================================================================
+   6. SECÇÃO 'MENU SHOWCASE' (MARQUEE)
+   ========================================================================== */
+.section-menu-carousel { background-color: var(--cor-fundo-secundario); padding: 8rem 0; overflow: hidden; transition: background-color 0.4s ease; }
+.section-menu-carousel .container { padding-bottom: 4rem; }
+.marquee-wrapper { position: relative; width: 100%; transition: background-color 0.4s ease; }
+.marquee-content {
+    --item-width: 30vw; --max-width: 450px; --min-width: 300px; --gap: 3vw;
+    --duration: 60s; --item-count: var(--num-items, 10);
+    --marquee-width: calc(var(--item-count) * (clamp(var(--min-width), var(--item-width), var(--max-width)) + var(--gap)));
+    display: flex; list-style: none; padding: 0; margin: 0;
+    width: var(--marquee-width); animation: scroll-left var(--duration) linear infinite;
+}
+@keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(calc(-1 * var(--marquee-width) / 2)); } }
+.marquee-wrapper:hover .marquee-content { animation-play-state: paused; }
+.marquee-item {
+    flex: 0 0 auto; width: clamp(var(--min-width), var(--item-width), var(--max-width));
+    aspect-ratio: 3 / 4; margin: 0 calc(var(--gap) / 2); position: relative;
+    overflow: hidden; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease; cursor: zoom-in;
+}
+.marquee-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); }
+.panel-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.6s ease; }
+.marquee-item:hover .panel-bg { transform: scale(1.05); }
+.marquee-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%); z-index: 1; }
+.panel-content { position: absolute; bottom: 0; left: 0; right: 0; z-index: 2; padding: 2rem; color: #ffffff; text-align: left; }
+.panel-content h3 { font-family: var(--font-titulos); font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; line-height: 1.1; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7); }
+
+/* ==========================================================================
+   7. CARROSSEL DE EVENTOS
+   ========================================================================== */
+.event-carousel-wrapper { max-width: 900px; margin: 3rem auto 0; position: relative; }
+.event-carousel { display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-behavior: smooth; border-radius: 8px; scroll-snap-type: x mandatory; }
+.event-carousel::-webkit-scrollbar { display: none; }
+.carousel-slide { flex: 0 0 100%; width: 100%; scroll-snap-align: center; aspect-ratio: 16 / 9; }
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.carousel-dots { display: flex; justify-content: center; gap: 12px; margin-top: 1.5rem; }
+.carousel-dot { width: 10px; height: 10px; background-color: #ccc; border-radius: 50%; cursor: pointer; border: none; transition: all 0.3s ease; }
+.carousel-dot:hover { transform: scale(1.2); }
+.carousel-dot.active { background-color: var(--vermelho); }
+.carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.4); color: white; border: none; border-radius: 50%; width: 44px; height: 44px; font-size: 20px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+.carousel-arrow:hover { background-color: rgba(0, 0, 0, 0.7); transform: translateY(-50%) scale(1.1); }
+.carousel-arrow.prev { left: -25px; }
+.carousel-arrow.next { right: -25px; }
+
+/* ==========================================================================
+   8. FOOTER, BOTÕES, WIDGET
+   ========================================================================== */
+.btn { display: inline-block; padding: 1rem 2.5rem; font-family: 'Source Sans Pro', sans-serif; font-weight: 600; font-size: 1rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 50px; border: 1px solid transparent; cursor: pointer; transition: all 0.3s ease; text-align: center; }
+.btn-reserva { background-color: #ffffff; color: var(--cor-texto-principal); border-color: #ffffff; }
+.btn-reserva:hover { background-color: transparent; color: #ffffff; border-color: #ffffff; }
+.btn-primary { background-color: var(--vermelho); color: #ffffff; border-color: var(--vermelho); }
+.btn-primary:hover { background-color: #9d3330; border-color: #9d3330; transform: translateY(-2px); }
+
+footer#pageFooterBottom { background-color: var(--cor-fundo-secundario); margin-top: 0; transition: background-color 0.4s ease; }
+.contacto-info { text-align: center; font-size: 1.1rem; line-height: 2; }
+.footer-bottom { background-color: #333; color: rgba(255, 255, 255, 0.5); text-align: center; padding: 2rem 0; font-size: 0.9rem; transition: background-color 0.4s ease, color 0.4s ease; }
+
+#whatsapp-widget { position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; transition: transform 0.3s ease, background-color 0.3s ease; }
+#whatsapp-widget:hover { transform: scale(1.1); background-color: #128C7E; }
+
+/* ==========================================================================
+   9. MODAIS
+   ========================================================================== */
+.modal-overlay { display: none; position: fixed; inset: 0; background-color: rgba(18, 18, 18, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 2000; align-items: center; justify-content: center; padding: 1rem; overflow-y: auto; animation: modal-fade-in 0.4s; }
+@keyframes modal-fade-in { from { opacity: 0; } to { opacity: 1; } }
+.modal-content { position: relative; background-color: var(--cor-fundo-principal); color: var(--cor-texto-principal); padding: 2rem 2.5rem 2.5rem; border-radius: 8px; max-width: 520px; width: 95%; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid var(--cor-borda); animation: modal-zoom-in 0.4s ease-out; transition: background-color 0.4s ease, color 0.4s ease, border 0.4s ease; }
+@keyframes modal-zoom-in { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+.close-modal { position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 2.5rem; font-weight: 300; color: #aaa; cursor: pointer; transition: all 0.3s ease; line-height: 1; }
+.close-modal:hover { color: var(--cor-texto-principal); transform: rotate(90deg) scale(1.1); }
+.modal-title { font-family: var(--font-titulos); font-size: 2.2rem; font-weight: 700; color: var(--cor-texto-principal); margin-bottom: 0.5rem; text-align: center; }
+.modal-subtitle { text-align: center; margin-bottom: 2rem; color: var(--cor-texto-secundario); }
+.form-group { margin-bottom: 1.25rem; }
+.form-group-inline { display: flex; gap: 1rem; }
+.form-group-inline .form-group { flex: 1; }
+.form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.form-group input, .form-group select { width: 100%; padding: 0.9rem 1rem; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 4px; color: var(--cor-texto-secundario); font-family: 'Source Sans Pro', sans-serif; font-size: 1rem; transition: all 0.3s ease; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--vermelho); background-color: #ffffff; box-shadow: 0 0 0 3px rgba(185, 60, 56, 0.2); }
+.modal-btn { width: 100%; margin-top: 1rem; padding: 1.2rem; }
+
+.success-content { text-align: center; }
+.checkmark-svg { width: 100px; height: 100px; display: block; margin: 0 auto 1.5rem; }
+.checkmark-circle { stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 2; stroke-miterlimit: 10; stroke: #4BB543; fill: none; animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards; }
+.checkmark-check { transform-origin: 50% 50%; stroke-dasharray: 48; stroke-dashoffset: 48; stroke-width: 3; stroke: #4BB543; fill: none; animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards; }
+@keyframes stroke { 100% { stroke-dashoffset: 0; } }
+
+/* ==========================================================================
+   9. INTERACCIONES (Marquee Expand)
+   ========================================================================== */
+.marquee-overlay { display: none; position: fixed; inset: 0; background-color: rgba(18, 18, 18, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 1500; cursor: zoom-out; }
+.marquee-content.is-paused { animation-play-state: paused; }
+.panel-description { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.5s ease-out, opacity 0.4s ease-out 0.2s; }
+.panel-description p { margin-top: 1rem; font-size: 1rem; line-height: 1.6; color: rgba(255, 255, 255, 0.9); }
+
+.marquee-item.is-expanded {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw; max-width: 600px;
+    height: auto; max-height: 80vh;
+    z-index: 1501; cursor: zoom-out;
+}
+.marquee-item.is-expanded .panel-description { max-height: 300px; opacity: 1; }
+
+/* ==========================================================================
+   10. MODO OSCURO
+   ========================================================================== */
+body.dark-mode {
+    --cor-fundo-principal: #101010;
+    --cor-fundo-secundario: #1a1a1a;
+    --cor-texto-principal: #f7f7f7;
+    --cor-texto-secundario: #a0a0a0;
+    --cor-borda: #333;
+}
+body.dark-mode header#pageHeader.scrolled { background-color: rgba(18, 18, 18, 0.85); }
+body.dark-mode .lang-menu { background-color: rgba(30, 30, 30, 0.8); border-color: #444; }
+body.dark-mode .lang-menu a { color: #ffffff; }
+body.dark-mode .lang-menu a:hover { background-color: rgba(255, 255, 255, 0.1); }
+body.dark-mode .lang-menu a.active { color: var(--ouro); }
+body.dark-mode .about-grid .text-content p span { color: var(--ouro); }
+body.dark-mode .section-menu-carousel { background-color: var(--cor-fundo-secundario); }
+body.dark-mode .marquee-wrapper { background-color: var(--cor-fundo-principal); }
+body.dark-mode .footer-bottom { background-color: #000000; }
+body.dark-mode .modal-content { background-color: #222; border-color: #444; }
+body.dark-mode .close-modal { color: #888; }
+body.dark-mode .form-group input, body.dark-mode .form-group select { background-color: #333; border-color: #555; color: #f7f7f7; }
+body.dark-mode .form-group input:focus, body.dark-mode .form-group select:focus { background-color: #101010; border-color: var(--ouro); box-shadow: 0 0 0 3px rgba(224, 192, 112, 0.3); }
+body.dark-mode .carousel-dot.active { background-color: var(--ouro); }
+body.dark-mode .btn-primary { background-color: var(--ouro); border-color: var(--ouro); color: #101010; }
+body.dark-mode .btn-primary:hover { background-color: #c8a862; border-color: #c8a862; }
+
+body.dark-mode .btn-reserva {
+    background-color: transparent;
+    color: #ffffff;
+    border-color: #ffffff;
+}
+body.dark-mode .btn-reserva:hover {
+    background-color: #ffffff;
+    color: var(--cor-fundo-principal);
+}
+
+/* ==========================================================================
+   11. MEDIA QUERIES (RESPONSIVE)
+   ========================================================================== */
+@media (max-width: 900px) { 
+    .section { padding: 6rem 2rem; }
+    .carousel-arrow.prev { left: 10px; }
+    .carousel-arrow.next { right: 10px; }
+}
+
+@media (max-width: 767px) {
+    .section { padding: 4rem 1.5rem; }
+    header#pageHeader { padding: 1rem; }
+    .header-left, .header-right { flex: 1 0 auto; }
+    .carousel-arrow { display: none; }
+    .event-carousel { scroll-snap-type: x mandatory; }
+    .marquee-content { --item-width: 60vw; --min-width: 250px; --gap: 5vw; --duration: 45s; }
+    .form-group-inline { flex-direction: column; gap: 0; }
+    
+    .logo-container { transform: translate(-50%, -50%); width: auto; flex: unset; position: absolute; left: 50%; }
+    .logo-text { display: inline-block; font-size: 1.2rem; }
+    .logo-icon { height: 30px; }
+    header#pageHeader.scrolled .logo-icon { height: 28px; }
+    header#pageHeader.scrolled .logo-text { font-size: 1.1rem; }
+} 
